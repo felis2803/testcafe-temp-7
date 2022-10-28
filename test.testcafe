@@ -1,0 +1,92 @@
+{
+    "fixtures": [
+        {
+            "name": "test",
+            "pageUrl": "./index.html",
+            "tests": [
+                {
+                    "name": "New Test",
+                    "commands": [
+                        {
+                            "type": "execute-async-expression",
+                            "studio": {},
+                            "callsite": "0",
+                            "expression": "const { MyRequestHook } = require('./my-request-hook');\r\n\r\nglobal.requests  = [];\r\nglobal.responses = [];\r\n\r\nconst myRequestHook = new MyRequestHook(requests, responses);\r\n\r\nawait t.addRequestHooks(myRequestHook);\r\n\r\nawait t\r\n    .expect(requests.length).eql(0)\r\n    .expect(responses.length).eql(0);\r\n"
+                        },
+                        {
+                            "selector": {
+                                "type": "js-expr",
+                                "value": "Selector('button').withText('Click me for fetch')"
+                            },
+                            "studio": {
+                                "selectors": [
+                                    {
+                                        "rawSelector": {
+                                            "type": "js-expr",
+                                            "value": "Selector('button').withText('Click me for fetch')"
+                                        },
+                                        "ruleType": "$text$"
+                                    },
+                                    {
+                                        "rawSelector": {
+                                            "type": "js-expr",
+                                            "value": "Selector('button')"
+                                        },
+                                        "ruleType": "$dom$"
+                                    }
+                                ],
+                                "useOffsets": false,
+                                "offsetX": 101,
+                                "offsetY": 12
+                            },
+                            "options": {},
+                            "type": "click",
+                            "callsite": "1"
+                        },
+                        {
+                            "type": "assertion",
+                            "studio": {
+                                "assertionMode": "checkElement",
+                                "selectors": [
+                                    {
+                                        "rawSelector": {
+                                            "type": "js-expr",
+                                            "value": "Selector('div').withText('{\\\"status\\\":200}').textContent"
+                                        },
+                                        "ruleType": "$text$"
+                                    },
+                                    {
+                                        "rawSelector": {
+                                            "type": "js-expr",
+                                            "value": "Selector('div').textContent"
+                                        },
+                                        "ruleType": "$dom$"
+                                    }
+                                ],
+                                "selectorType": "CSS Selector",
+                                "selectorPostfix": ".textContent"
+                            },
+                            "callsite": "2",
+                            "assertionType": "eql",
+                            "actual": {
+                                "type": "js-expr",
+                                "value": "Selector('div').withText('{\\\"status\\\":200}').textContent"
+                            },
+                            "options": {},
+                            "expected": {
+                                "type": "js-expr",
+                                "value": "\"{\\\"status\\\":200}\""
+                            }
+                        },
+                        {
+                            "type": "execute-async-expression",
+                            "studio": {},
+                            "callsite": "3",
+                            "expression": "await t\r\n    .expect(requests.length).eql(1)\r\n    .expect(responses.length).eql(1);"
+                        }
+                    ]
+                }
+            ]
+        }
+    ]
+}

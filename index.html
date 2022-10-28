@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        async function req () {
+            const data = await fetch('');
+
+            const div = document.createElement('div');
+
+            document.body.appendChild(div);
+
+            div.innerText = JSON.stringify({ status: data.status });
+        }
+    </script>
+    <button onclick="req()">Click me for fetch</button>
+</body>
+</html>
